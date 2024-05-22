@@ -155,12 +155,28 @@ class RecipeCard extends HTMLElement {
 		span.innerHTML = data.rating;
 		divRating.appendChild(span);
 		let img2 = document.createElement('img');
-		i
-		img2.src = "./assets/images/icons/5-star.svg";
-		img2.alt = "5 stars";
+		if (data.rating == 0) {
+			img2.src = "./assets/images/icons/0-star.svg";
+			img2.alt = "0 stars";
+		} else if (data.rating == 1) {
+			img2.src = "./assets/images/icons/1-star.svg";
+			img2.alt = "1 stars";
+		} else if (data.rating == 2) {
+			img2.src = "./assets/images/icons/2-star.svg";
+			img2.alt = "2 stars";
+		} else if (data.rating == 3) {
+			img2.src = "./assets/images/icons/3-star.svg";
+			img2.alt = "3 stars";
+		} else if (data.rating == 4) {
+			img2.src = "./assets/images/icons/4-star.svg";
+			img2.alt = "4 stars";
+		} else if (data.rating == 5) {
+			img2.src = "./assets/images/icons/5-star.svg";
+			img2.alt = "5 stars";
+		}
 		divRating.appendChild(img2);
 		let span1 = document.createElement("span");
-		span1.innerHTML = data.numRatings;
+		span1.innerHTML = "(" + data.numRatings + ")";
 		divRating.appendChild(span1);
 		shadowArticle.appendChild(divRating);
 
