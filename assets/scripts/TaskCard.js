@@ -1,4 +1,3 @@
-
 class TaskCard extends HTMLElement {
 	// Called once when document.createElement('recipe-card') is called, or
 	// the element is written into the DOM directly as <recipe-card>
@@ -13,6 +12,11 @@ class TaskCard extends HTMLElement {
 		// A3. TODO - Create a style element - This will hold all of the styles for the Web Component
 		const style = document.createElement("style");
 		style.innerHTML = `  
+        * {
+        font-family: "biski"; 
+        color:#594F4F;
+        }
+
 		.inside {
             font-size:20px;
             flex: 1 1 auto;
@@ -68,7 +72,7 @@ class TaskCard extends HTMLElement {
             background-color: white;
             cursor: pointer;
             position: absolute;
-            bottom: 32px;
+            bottom: 30px;
             right: 13px;
             transform: scaleX(-1);
         }
@@ -79,7 +83,7 @@ class TaskCard extends HTMLElement {
             background-color: white;
             cursor: pointer;
             position: absolute;
-            top: 32px;
+            top: 30px;
             right: 13px;
         }
     
@@ -134,15 +138,15 @@ class TaskCard extends HTMLElement {
         let orangeBlob = document.createElement("img");
         orangeBlob.src = "assets/images/orangeBlob.png";
         orangeBlob.alt = "Orange Blob"
-        orangeBlob.height = "65";
-        orangeBlob. width = "40";
+        orangeBlob.height = "40";
+        orangeBlob.width = "65";
         orangeBlob.classList.add("orangeBlob");
         shadowArticle.appendChild(orangeBlob);
         let grayBlob = document.createElement("img");
         grayBlob.src = "assets/images/grayBlob.png";
         grayBlob.alt = "Gray Blob"
-        grayBlob.height = "50";
-        grayBlob. width = "45";
+        grayBlob.height = "45";
+        grayBlob.width = "50";
         grayBlob.classList.add("grayBlob");
         shadowArticle.appendChild(grayBlob);
 
@@ -160,4 +164,3 @@ class TaskCard extends HTMLElement {
 //           'recipe-card' elements
 
 customElements.define("added-task", TaskCard);
-
