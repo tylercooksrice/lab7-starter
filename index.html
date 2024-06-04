@@ -1,207 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href= "https://code.jquery.com/ui/1.13.0/themes/dark-hive/jquery-ui.css"> 
-    <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"> </script> 
-    <script src= "https://code.jquery.com/ui/1.13.0/jquery-ui.js" integrity= "sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k=" 
-            crossorigin="anonymous"> 
-    </script> 
-    <link rel="stylesheet" href= "https://code.jquery.com/ui/1.13.0/themes/dark-hive/jquery-ui.css"> 
-    <title>Journal | Overview</title>
-    <link rel="stylesheet" href="assets\styles\main.css" />
-	<script src="assets/scripts/main.js" type="module"></script>
-	<script src="assets/scripts/TaskCard.js" type="module"></script>
-    <!--<script src="scripts/database/stores/task.js" type="module"></script><script src="scripts/database/stores/newTasks.js" type="module"></script>-->
-    <!-- Polyfill start - we can utilize importmap to elegantly import external vendors / libraries -->
-    <script>
-        window.process = { browser: true, env: { NODE_ENV: "production" } };
-    </script>
-    <script type="importmap">
-        {
-            "imports": {
-                "nanostores": "https://unpkg.com/nanostores@0.10.3/index.js",
-                "@nanostores/persistent": "https://unpkg.com/@nanostores/persistent@0.10.1/index.js"
-            }
-        }
-    </script>
-    
-    <!-- Polyfill end -->
-</head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Lab 6 - Recipe Cards</title>
 
-<body>
-    <div>
-        <h1>Task Lists</h1>
-    </div>
-    
-    <!-- Navigation Bar -->
-    <div class="nav">
-        <button id="open" onclick="openNav()"><img src="assets/images/navigation.png" alt="Menu Button" width="50" height="50"> </button>
-        <div id="navBar">
-            <button id="close" onclick="closeNav()">X</button>
-            <a href="index.html"></a>
-            <a href="calendar.html"></a>
-            <a href="tasks.html"></a>
-            <a href="journal.html"></a>
-        </div>
-    </div>
-    <script>
-        function openNav() {
-            document.getElementById("navbar").style.width = "100px";
-        }
-        function closeNav() {
-            document.getElementById("navBar").style.width = "0";
-        }
-    </script>
+		<!-- Recipe Card Custom Element -->
+		<script src="assets/scripts/RecipeCard.js" type="module"></script>
 
-    <div>
-        <button class="addColumns" id="columnBox"> 
-            <img src="assets/images/paw.png" alt= "Cat Paw" width="30" height="30"> <span>Add a column</span>
-        </button>
-    </div>
-
-    <!-- Three Boxes -->
-    <div id="container" class="boxes">
-        <!-- First Plan Boxes -->
-        <div class="planned">
-            <h2 class="h2color">Planned:</h2>
-            <div class="planTask">
-                <div class="content" id="plan">
-                    <!-- Shadow Root -->
-                    
-                </div>
-            </div>
-            <p>
-                <button class="add" id="modalPlan"> 
-                    <img src="assets/images/paw.png" alt= "Cat Paw" width="30" height="30"> <span>Add a task</span>
-                </button>
-            </p>
-        </div>
-
-        <!-- Second Work Boxes -->
-        <div class="working">
-            <h2 class="h2color">Working:</h2>
-            <div class="workingTask">
-                <div class="content">
-
-                    <!-- Shadow Root -->
-                    <article class="inside">
-                        <p>task name</p>
-                        <p>description</p>    
-                        <pre>Due 12/122/124</pre>
-                        <img class="orangeBlob" src="assets/images/orangeBlob.png" alt="Orange Blob" width="65" height="40">
-                        <img class="grayBlob" src="assets/images/grayBlob.png" alt="Gray Blob" width="50" height="45">             
-                        <button class="edit">
-                            <img class="pencil" src="assets/images/pencil.png" alt="remove" width="30" height="30">
-                        </button>
-                        <button class="remove">
-                            <img src="assets/images/close.jpg" alt="edit" width="23" height="23">
-                        </button>
-						<script>
-							
-						</script>
-                    </article>
-                    <article class="inside">
-                        <p>task name</p>
-                        <p>description</p>    
-                        <pre>Due 12/122/124</pre>
-                        <img class="orangeBlob" src="assets/images/orangeBlob.png" alt="Orange Blob" width="65" height="40">
-                        <img class="grayBlob" src="assets/images/grayBlob.png" alt="Gray Blob" width="50" height="45">             
-                        <button class="edit">
-                            <img class="pencil" src="assets/images/pencil.png" alt="remove" width="30" height="30">
-                        </button>
-                        <button class="remove">
-                            <img src="assets/images/close.jpg" alt="edit" width="23" height="23">
-                        </button>
-                    </article>
-                </div>
-            </div>
-            <p>
-                <button class="add" id="modalDone"> 
-                    <img src="assets/images/paw.png" alt= "Cat Paw" width="30" height="30"> <span>Add a task</span>
-                </button>
-            </p>
-        </div>
-
-        <!-- Third Done Boxes -->
-        <div class="done">
-            <h2 class="h2color">Done:</h2>
-            <div class="doneTask">
-                <div class="content">
-                    <!-- Shadow Root -->
-                    <article class="inside"> 
-                        <p>task name</p>
-                        <p>description</p>    
-                        <pre>Due 12/22/24</pre>
-                        <img class="orangeBlob" src="assets/images/orangeBlob.png" alt="Orange Blob" width="65" height="40">
-                        <img class="grayBlob" src="assets/images/grayBlob.png" alt="Gray Blob" width="50" height="45">             
-                        <button class="edit">
-                            <img class="pencil" src="assets/images/pencil.png" alt="remove" width="30" height="30">
-                        </button>
-                        <button class="remove">
-                            <img src="assets/images/close.jpg" alt="edit" width="23" height="23">
-                        </button>
-                    </article>
-                </div>
-            </div>
-            <p>
-                <button class="add" id="modalDone"> 
-                    <img src="assets/images/paw.png" alt= "Cat Paw" width="30" height="30"> <span>Add a task</span>
-                </button>
-            </p>
-        </div>
-        
-        <!--Add a Column Box-->
-        <article class="column">
-            <button class="addColumn" id="columnBox"> 
-                <img src="assets/images/paw.png" alt= "Cat Paw" width="30" height="30"> <span>Add a column</span>
-            </button>
-            <div class="addColumn">
-            </div>
-            <p>
-                <button class="add" id="modalDone"> 
-                    <img src="assets/images/paw.png" alt= "Cat Paw" width="30" height="30"> <span>Add a task</span>
-                </button>
-            </p>
-        </article>
-        
-        <script> 
-            $(".inside").draggable({ 
-                snap: ".inside", 
-            }) 
-        </script> 
-    </div>
-
-    <!-- Modal Box -->
-    <div class="modal" id="modalBlock">
-        <h1>Add a task</h1>
-        <div class="modalBlock">
-            <img class="cat" src="assets/images/cat.png" alt="cat sitting"  width="140" height="110">
-            <span class="close">X</span>
-            <form class="modalContent" id="modalForm">
-                <fieldset>
-                    <label for="taskName">
-                        Task Name<br>
-                        <input type="text" id="taskName" name="taskName" class="inputs" required />
-                    </label>
-                    <label for="dueDate">	
-                        Due Date<br>
-                        <input type="text" id="dueDate" name="dueDate" class="inputs" required />
-                    </label>
-                    <label for="taskDesc">
-                        Task Description<br>
-                        <input type="text" id="taskDesc" name="taskDesc" class="inputs" required />
-                    <label for="journal">
-                        Link to Journal<br>
-                        <input type="text" id="journal" name="journal" class="inputs" required />
-                    </label>
-                    <label for="tag">
-                        Tags<br>
-                        <input type="text" id="tag" name="tag" class="inputs" required />
-                    </label>
-                </fieldset>
-                <button type="submit" id="taskEnter">Add Task</button>
-            </form>
-        </div>
-    </div>
-</body>
+		<!-- Main Stylesheets & Scripts -->
+		<link rel="stylesheet" href="assets/styles/main.css" />
+		<script src="assets/scripts/main.js" type="module"></script>
+	</head>
+	<body>
+		<main>
+			<!-- Add Recipes Here -->
+		</main>
+		<!-- For the Explore section - Remove "hidden" class before beginning -->
+		<form id="new-recipe">
+			<fieldset>
+				<legend>Image:</legend>
+				<label for="imgSrc">
+					Source:
+					<input type="text" id="imgSrc" name="imgSrc" required />
+				</label>
+				<label for="imgAlt">
+					Alt Text:
+					<input type="text" id="imgAlt" name="imgAlt" required />
+				</label>
+			</fieldset>
+			<fieldset>
+				<legend>Title:</legend>
+				<label for="titleTxt"
+					>Text:
+					<input type="text" id="titleTxt" name="titleTxt" required />
+				</label>
+				<label for="titleLnk"
+					>Link:
+					<input type="url" id="titleLnk" name="titleLnk" required />
+				</label>
+			</fieldset>
+			<fieldset>
+				<legend>Rating</legend>
+				<label for="rating-0"> 0<input type="radio" id="rating-0" value="0" name="rating" /> </label>
+				<label for="rating-1"> 1<input type="radio" id="rating-1" value="1" name="rating" /> </label>
+				<label for="rating-2"> 2<input type="radio" id="rating-2" value="2" name="rating" /> </label>
+				<label for="rating-3"> 3<input type="radio" id="rating-3" value="3" name="rating" /> </label>
+				<label for="rating-4"> 4<input type="radio" id="rating-4" value="4" name="rating" /> </label>
+				<label for="rating-5"> 5<input type="radio" id="rating-5" value="5" name="rating" /> </label>
+				<label for="numRatings">
+					Num Ratings:
+					<input type="number" id="numRatings" name="numRatings" />
+				</label>
+			</fieldset>
+			<fieldset>
+				<legend>Other Info:</legend>
+				<label for="organization">
+					Organization:
+					<input type="text" id="organization" name="organization" required />
+				</label>
+				<label for="lengthTime">
+					Length (time):
+					<input type="text" id="lengthTime" name="lengthTime" required />
+				</label>
+				<label for="ingredients">
+					<p>Ingredients:</p>
+					<textarea name="ingredients" id="ingredients" cols="38" rows="5" required></textarea>
+				</label>
+			</fieldset>
+			<button type="submit">Add Recipe</button>
+			<button type="button" class="danger">Clear Local Storage</button>
+		</form>
+	</body>
 </html>

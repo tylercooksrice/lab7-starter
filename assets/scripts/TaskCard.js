@@ -1,4 +1,6 @@
-class TaskCard extends HTMLElement {
+// RecipeCard.js
+
+class RecipeCard extends HTMLElement {
 	// Called once when document.createElement('recipe-card') is called, or
 	// the element is written into the DOM directly as <recipe-card>
 	constructor() {
@@ -12,85 +14,82 @@ class TaskCard extends HTMLElement {
 		// A3. TODO - Create a style element - This will hold all of the styles for the Web Component
 		const style = document.createElement("style");
 		style.innerHTML = `  
-        * {
-        font-family: "biski"; 
-        color:#594F4F;
-        }
-
-		.inside {
-            font-size:20px;
-            flex: 1 1 auto;
-            background-color: white;
-            padding-left: 30px;
-            padding-top: 15px;
-            padding-bottom: 40px;
-            margin-left: 20px;
-            margin-right: 20px;
-            margin-top: 20px;
-            width: 240px;
-            height: 80px;
-            /*change this to make them fly else where*/
-            position: relative;
-            border-radius: 80px;
-        }
-        /*name & description*/
-        .inside p {
-            text-align: left;
-            position: relative;
-            background-color: white;
-            margin: 0;
-            width: 200px;
-        }
-    
-        /*due date*/
-        .inside pre{
-            left: 90px;
-            position: absolute;
-            text-align: right;
-            background-color: white;
-            width: 100px;
-            margin:0;
-            border: none;
-        }
-    
-        .orangeBlob{
-            top: 0;
-            position: absolute;
-            background-color: transparent;
-        }
-    
-        .grayBlob {
-            position: absolute;
-            background-color: transparent;
-            left: 45px;
-            bottom: 0;
-        }
-    
-        /* remove button*/
-        .edit {
-            border: none;
-            background-color: white;
-            cursor: pointer;
-            position: absolute;
-            bottom: 30px;
-            right: 13px;
-            transform: scaleX(-1);
-        }
-    
-        /* edit button*/
-        .remove {
-            border: none;
-            background-color: white;
-            cursor: pointer;
-            position: absolute;
-            top: 30px;
-            right: 13px;
-        }
-    
-        .pencil {
-            background-color: white;
-        }`;
-
+		* {
+			font-family: sans-serif;
+			margin: 0;
+			padding: 0;
+		  }
+		
+		  a {
+			text-decoration: none;
+		  }
+		
+		  a:hover {
+			text-decoration: underline;
+		  }
+		
+		  article {
+			align-items: center;
+			border: 1px solid rgb(223, 225, 229);
+			border-radius: 8px;
+			display: grid;
+			grid-template-rows: 118px 56px 14px 18px 15px 36px;
+			height: auto;
+			row-gap: 5px;
+			padding: 0 16px 16px 16px;
+			width: 178px;
+		  }
+		
+		  div.rating {
+			align-items: center;
+			column-gap: 5px;
+			display: flex;
+		  }
+		
+		  div.rating>img {
+			height: auto;
+			display: inline-block;
+			object-fit: scale-down;
+			width: 78px;
+		  }
+		
+		  article>img {
+			border-top-left-radius: 8px;
+			border-top-right-radius: 8px;
+			height: 118px;
+			object-fit: cover;
+			margin-left: -16px;
+			width: calc(100% + 32px);
+		  }
+		
+		  p.ingredients {
+			height: 32px;
+			line-height: 16px;
+			padding-top: 4px;
+			overflow: hidden;
+		  }
+		
+		  p.organization {
+			color: black !important;
+		  }
+		
+		  p.title {
+			display: -webkit-box;
+			font-size: 16px;
+			height: 36px;
+			line-height: 18px;
+			overflow: hidden;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+		  }
+		
+		  p:not(.title),
+		  span,
+		  time {
+			color: #70757A;
+			font-size: 12px;
+		  }
+		`;
 		// A4. TODO - Insert all of the styles from cardTemplate.html into the <style> element you just made (copy everything INSIDE the <style> tag>)
 		shadowRoot.appendChild(article);
 		shadowRoot.appendChild(style);
@@ -118,49 +117,80 @@ class TaskCard extends HTMLElement {
 	 *                        }	
 	 */
 	set data(data) {
-        if (!data) {
-            alert("Nothing has been entered")
-            return;
-        }
-        const shadowArticle = this.shadowRoot.querySelector('article');
+		// If nothing was passed in, return
+		if (!data) return;
 
-        shadowArticle.classList.add("inside");
-        let taskName = document.createElement("p"); 
-        taskName.innerHTML = data.taskName; // replace with dynamic data
-        shadowArticle.appendChild(taskName);
-        let taskDesc = document.createElement("p"); 
-        taskDesc.innerHTML = data.taskDesc; // replace with dynamic data
-        shadowArticle.appendChild(taskDesc);
-        let taskDate = document.createElement("pre"); 
-        taskDate.innerHTML = data.dueDate; // replace with dynamic data
-        shadowArticle.appendChild(taskDate);
+		// A6. TODO - Select the <article> we added to the Shadow DOM in the constructor
+		const shadowArticle = this.shadowRoot.querySelector('article');
+		
+		// A7. TODO - Set the contents of the <article> with the <article> template given in
+		//           cardTemplate.html and the data passed in (You should only have one <article>,
+		//           do not nest an <article> inside another <article>). You should use template
+		//           literals (template strings) and element.innerHTML for this.
+		// 			 Do NOT include the <article> tags within the innerHTML of the element you create.
+		//           Remember to replace all the placeholders in the template with the data passed in.
+		//           i.e. imgSrc, titleLnk, etc
 
-        let orangeBlob = document.createElement("img");
-        orangeBlob.src = "assets/images/orangeBlob.png";
-        orangeBlob.alt = "Orange Blob"
-        orangeBlob.height = "40";
-        orangeBlob.width = "65";
-        orangeBlob.classList.add("orangeBlob");
-        shadowArticle.appendChild(orangeBlob);
-        let grayBlob = document.createElement("img");
-        grayBlob.src = "assets/images/grayBlob.png";
-        grayBlob.alt = "Gray Blob"
-        grayBlob.height = "45";
-        grayBlob.width = "50";
-        grayBlob.classList.add("grayBlob");
-        shadowArticle.appendChild(grayBlob);
+		let img = document.createElement('img');
+		img.src = data.imgSrc;
+		img.alt = data.imgAlt;
+		shadowArticle.appendChild(img);
 
-        let editBtn = document.createElement("button"); 
-        editBtn.innerHTML = `<img class="pencil" src="assets/images/pencil.png" alt="remove" width="30" height="30">`;
-        editBtn.classList.add("edit"); 
-        shadowArticle.appendChild(editBtn);
-        let delBtn = document.createElement("button");
-        delBtn.innerHTML = `<img src="assets/images/close.jpg" alt="edit" width="23" height="23">`;
-        delBtn.classList.add("remove"); 
-        shadowArticle.appendChild(delBtn);
+		let pTitle = document.createElement('p');
+		pTitle.classList.add('title');
+		let a = document.createElement('a');
+		a.href = data.titleLnk;
+		a.innerHTML = data.titleTxt;
+		pTitle.appendChild(a);
+		shadowArticle.appendChild(pTitle);
+
+		let pOrg = document.createElement('p');
+		pOrg.classList.add("organization");
+		pOrg.innerHTML = data.organization;
+		shadowArticle.appendChild(pOrg);
+
+		let divRating = document.createElement("div");
+		divRating.classList.add("rating");
+		let span = document.createElement("span");
+		span.innerHTML = data.rating;
+		divRating.appendChild(span);
+		let img2 = document.createElement('img');
+		if (data.rating == 0) {
+			img2.src = "./assets/images/icons/0-star.svg";
+			img2.alt = "0 stars";
+		} else if (data.rating == 1) {
+			img2.src = "./assets/images/icons/1-star.svg";
+			img2.alt = "1 stars";
+		} else if (data.rating == 2) {
+			img2.src = "./assets/images/icons/2-star.svg";
+			img2.alt = "2 stars";
+		} else if (data.rating == 3) {
+			img2.src = "./assets/images/icons/3-star.svg";
+			img2.alt = "3 stars";
+		} else if (data.rating == 4) {
+			img2.src = "./assets/images/icons/4-star.svg";
+			img2.alt = "4 stars";
+		} else if (data.rating == 5) {
+			img2.src = "./assets/images/icons/5-star.svg";
+			img2.alt = "5 stars";
+		}
+		divRating.appendChild(img2);
+		let span1 = document.createElement("span");
+		span1.innerHTML = "(" + data.numRatings + ")";
+		divRating.appendChild(span1);
+		shadowArticle.appendChild(divRating);
+
+		let time = document.createElement("time");
+		time.innerHTML = data.lengthTime;
+		shadowArticle.appendChild(time);
+
+		let ingredient = document.createElement("p");
+		ingredient.classList.add("ingredients")
+		ingredient.innerHTML = data.ingredients;
+		shadowArticle.appendChild(ingredient);
 	}
 }
 // A8. TODO - Define the Class as a customElement so that you can create
 //           'recipe-card' elements
 
-customElements.define("added-task", TaskCard);
+customElements.define("recipe-card", RecipeCard);
