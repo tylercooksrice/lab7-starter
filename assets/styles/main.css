@@ -53,7 +53,7 @@ h1 {
 }
 
 /*Container for three boxes*/
-.container {
+#container {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;

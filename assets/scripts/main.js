@@ -70,6 +70,7 @@ function getRecipesFromStorage() {
 function addRecipesToDocument(tasks) {
 	// A10. TODO - Get a reference to the <main> element
 	const taskList = document.getElementById("plan");
+	
 	// A11. TODO - Loop through each of the recipes in the passed in array,
 	//            create a <recipe-card> element for each one, and populate
 	//            each <recipe-card> with that recipe data using element.data = ...
@@ -123,13 +124,13 @@ function initFormHandler() {
 	// B7. TODO - Add the recipeObject data to <recipe-card> using element.data
 	newTaskCard.data = taskObject;
 	// B8. TODO - Append this new <recipe-card> to <main>
-	const mainPage = document.getElementById("content");
+	const mainPage = document.getElementById("plan");
 	mainPage.appendChild(newTaskCard);
 	// B9. TODO - Get the recipes array from localStorage, add this new recipe to it, and
 	//            then save the recipes array back to localStorage
 	let tasks = JSON.parse(localStorage.getItem('tasks')) || []; 
 	tasks.push(taskObject);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 	});
 	// B10. TODO - Get a reference to the "Clear Local Storage" button
 	
